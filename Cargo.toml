@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "crates/common",
+    "crates/00_randomness",
+]
+
+
+# cargo new crates/common --lib
+# cargo new crates/00_randomness --bin --name randomness
