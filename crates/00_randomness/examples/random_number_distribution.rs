@@ -32,7 +32,7 @@ impl Bars {
 
 #[macroquad::main("MyGame")]
 async fn main() {
-    let mut bars = Bars::new(2);
+    let mut bars = Bars::new(20);
     loop {
         clear_background(BLACK);
 

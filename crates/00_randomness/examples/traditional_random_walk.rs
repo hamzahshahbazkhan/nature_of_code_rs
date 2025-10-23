@@ -28,8 +28,11 @@ impl Walker {
         //     self.y -= 1.;
         // }
 
-        let x_step = rand::gen_range(0, 3) - 1;
-        let y_step = rand::gen_range(0, 3) - 1;
+        // This is if you want it to have the tendency to move right.
+        // let x_step = rand::gen_range(-3., 3.5);
+
+        let x_step = rand::gen_range(-3, 3);
+        let y_step = rand::gen_range(-3, 3);
 
         self.x += x_step as f32;
         self.y += y_step as f32;
