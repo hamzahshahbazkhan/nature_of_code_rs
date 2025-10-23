@@ -17,16 +17,22 @@ impl Walker {
     }
 
     fn step(&mut self) {
-        let choice = rand::gen_range(1, 5);
-        if choice == 1 {
-            self.x += 1.;
-        } else if choice == 2 {
-            self.x -= 1.;
-        } else if choice == 3 {
-            self.y += 1.;
-        } else if choice == 4 {
-            self.y -= 1.;
-        }
+        // let choice = rand::gen_range(1, 5);
+        // if choice == 1 {
+        //     self.x += 1.;
+        // } else if choice == 2 {
+        //     self.x -= 1.;
+        // } else if choice == 3 {
+        //     self.y += 1.;
+        // } else if choice == 4 {
+        //     self.y -= 1.;
+        // }
+
+        let x_step = rand::gen_range(0, 3) - 1;
+        let y_step = rand::gen_range(0, 3) - 1;
+
+        self.x += x_step as f32;
+        self.y += y_step as f32;
     }
 }
 
