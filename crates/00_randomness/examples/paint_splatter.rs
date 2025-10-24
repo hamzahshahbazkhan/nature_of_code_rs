@@ -11,6 +11,7 @@ async fn main() {
     let mut b = 0.;
     let mut a = 0.8;
     let mut color_randomness = 0.1;
+    let mut circle_spread = 1.;
 
     let mut spread = 50.0;
     let mut circle_size = 9.;
@@ -60,6 +61,9 @@ async fn main() {
                 ui.separator();
                 ui.label(None, "hue range");
                 widgets::Slider::new(hash!(), 0.1..1.0).ui(ui, &mut color_randomness);
+                ui.separator();
+                ui.label(None, "circle spread");
+                widgets::Slider::new(hash!(), 1.0..8.0).ui(ui, &mut circle_spread);
             });
 
         let color_range = rand::gen_range(-color_randomness, color_randomness);
@@ -73,7 +77,7 @@ async fn main() {
             a,
         };
 
-        let circle_size_range = rand::gen_range(-1., 1.);
+        let circle_size_range = rand::gen_range(-circle_spread, circle_spread);
 
         let new_circle_size = circle_size + circle_size_range;
 
