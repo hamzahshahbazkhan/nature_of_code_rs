@@ -79,6 +79,6 @@ async fn main() {
     }
 }
 
-//NOTE: Here the rng is preseed so it is not really producing a deterministic path everytime. To
+//NOTE: Here the rng is pre seeded so it is not really producing a deterministic path everytime. To
 //get close to producing the different results. you can seed the rng with the current time as done
 //in the exxample : accept_reject_random_walker
