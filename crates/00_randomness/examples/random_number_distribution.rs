@@ -20,9 +20,9 @@ impl Bars {
 
         let w = screen_width() as u32 / self.length;
 
+        let y = screen_height();
         for (i, b) in self.vector.iter().enumerate() {
             let x = i as f32 * w as f32;
-            let y = screen_height();
             let h = -(*b as f32);
             draw_rectangle(x, y, w as f32, h, ORANGE);
             draw_rectangle_lines(x, y, w as f32, h, 2., BLACK);
