@@ -3,7 +3,7 @@ use macroquad::prelude::*;
 pub fn accept_reject() -> f32 {
     loop {
         let r1 = rand::gen_range(0., 1.);
-        let probability = r1;
+        let probability = r1 * r1;
         let r2 = rand::gen_range(0., 1.);
 
         if r2 < probability {
