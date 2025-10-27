@@ -1,4 +1,5 @@
 use macroquad::prelude::*;
+use macroquad::rand::srand;
 
 pub fn accept_reject() -> f32 {
     loop {
@@ -34,12 +35,19 @@ impl Walker {
         let mut x_step = accept_reject() * step;
         let mut y_step = accept_reject() * step;
 
-        let bool = [true, false];
+        // let bool = [true, false];
+        //
+        // if bool[rand::gen_range(0, 2)] {
+        //     x_step *= -1.;
+        // }
+        // if bool[rand::gen_range(0, 2)] {
+        //     y_step *= -1.;
+        // }
 
-        if bool[rand::gen_range(0, 2)] {
+        if rand::gen_range(0., 1.) > 0.5 {
             x_step *= -1.;
         }
-        if bool[rand::gen_range(0, 2)] {
+        if rand::gen_range(0., 1.) > 0.5 {
             y_step *= -1.;
         }
 
@@ -50,6 +58,10 @@ impl Walker {
 
 #[macroquad::main("MyGame")]
 async fn main() {
+    // srand to seed the rng with the current time so that the bias is removed as it was there in
+    // previous walker which i may not have noticed.
+
+    srand(miniquad::date::now() as u64);
     let mut walker = Walker::new();
 
     let render_target = render_target(screen_width() as u32, screen_height() as u32);
