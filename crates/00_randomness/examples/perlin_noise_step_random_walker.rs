@@ -14,28 +14,33 @@ impl Walker {
             x: screen_width() / 2.,
             y: screen_height() / 2.,
             tx: 0.,
-            ty: 100000.,
+            ty: 10000.,
         }
     }
     fn show(&self) {
-        draw_circle(self.x, self.y, 18., GREEN);
-        draw_circle_lines(self.x, self.y, 18., 1., BLACK);
+        draw_circle(self.x, self.y, 1., PURPLE);
+        // draw_circle_lines(self.x, self.y, 14., 1., BLACK);
     }
     fn step(&mut self, noise: &Perlin) {
-        let nx = noise.get([self.tx as f64]) as f32;
-        let ny = noise.get([self.ty as f64]) as f32;
+        // useing 2D noise as 1D noise result was too deterministic
+        let x_step = noise.get([self.tx as f64, self.tx as f64]);
+        let y_step = noise.get([self.ty as f64, self.ty as f64]);
 
-        self.x = ((nx as f32 + 1.0) / 2.0) * screen_width();
-        self.y = ((ny as f32 + 1.0) / 2.0) * screen_height();
         self.tx += 0.01;
         self.ty += 0.01;
+
+        // println!("x: {x_step}");
+        // println!("y: {y_step}");
+
+        self.x += x_step as f32;
+        self.y += y_step as f32;
     }
 }
 
 #[macroquad::main("MyGame")]
 async fn main() {
     let mut walker = Walker::new();
-    let perlin = Perlin::new(0);
+    let noise = Perlin::new(1);
 
     let render_target = render_target(screen_width() as u32, screen_height() as u32);
     render_target.texture.set_filter(FilterMode::Nearest);
@@ -49,10 +54,12 @@ async fn main() {
 
     set_camera(&camera);
     clear_background(BLACK);
+
     loop {
         set_camera(&camera);
+
         walker.show();
-        walker.step(&perlin);
+        walker.step(&noise);
 
         set_default_camera();
         clear_background(BLACK);
@@ -67,7 +74,6 @@ async fn main() {
                 ..Default::default()
             },
         );
-
         next_frame().await
     }
 }
