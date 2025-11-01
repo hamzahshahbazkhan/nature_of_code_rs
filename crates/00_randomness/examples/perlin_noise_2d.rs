@@ -8,7 +8,7 @@ async fn main() {
     let mut image = Image::gen_image_color(image_width, image_height, WHITE);
     let noise = Perlin::new(0);
 
-    let scale = 1.;
+    let scale = 0.6;
 
     let mut xoff = 0.0;
     for x in 0..image_width {
@@ -25,9 +25,9 @@ async fn main() {
             };
 
             image.set_pixel(x as u32, y as u32, color);
-            yoff += 0.002;
+            yoff += 0.01;
         }
-        xoff += 0.002;
+        xoff += 0.01;
     }
 
     let texture = Texture2D::from_image(&image);
